@@ -84,7 +84,7 @@ function draw() {
     }
 
     //define array of pieces to better handle the pieces generation
-    const pieces = [I, O, T, J, L, S, Z]
+    const pieces = [I, O, T, J, L, S, Z];
 
     // render tetramino based on shape and accepts the position on the field as x and y parameters
 
@@ -98,7 +98,7 @@ function draw() {
                     field.fillRect((i * 40) + (x * 40), (j * 40) + (y * 40), 40, 40);
                     //draw piece
                     field.fillStyle = piece.color;
-                    field.fillRect((i * 40) + (x * 40) - 2, (j * 40) + (y * 40) - 2, 40 - 4, 40 - 4)
+                    field.fillRect((i * 40) + (x * 40) - 2, (j * 40) + (y * 40) - 2, 40 - 4, 40 - 4);
                 }
             }
         }
@@ -119,14 +119,15 @@ function draw() {
         piece = pieces[testPiece];
     }
 
-    console.log(testPiece)
+    console.log(testPiece);
 
 
     const handleKeyboardInput = (e) => {
-        movePiece(e, piece);
+        movePiece(1, piece);
+        playerMovePiece(e, piece);
     }
 
-    const movePiece = (e, piece) => {
+    const playerMovePiece = (e, piece) => {
 
         e.preventDefault();
 
@@ -136,46 +137,56 @@ function draw() {
         switch (e.key) {
 
             case 'ArrowRight': {
-                if (horizontal >= 0 && horizontal < piece.limitH) horizontal++
-                // horizontal++
+                if (horizontal >= 0 && horizontal < piece.limitH) horizontal++;
+                // horizontal++;
                 break
             }
             case 'ArrowLeft': {
-                // horizontal--
-                if (horizontal > 0 && horizontal <= piece.limitH) horizontal--
+                // horizontal--;
+                if (horizontal > 0 && horizontal <= piece.limitH) horizontal--;
                 break
 
             }
             // for tests only, need to be removed
             case 'ArrowUp': {
-                vertical--
+                vertical--;
                 break
             }
 
             case 'ArrowDown': {
-                if (vertical < piece.limitV) vertical++
-                // vertical++
+                if (vertical < piece.limitV) vertical++;
+                // vertical++;
                 break
 
             }
 
             case ' ': {
                 if (rotation == 270) {
-                    rotation = 0
+                    rotation = 0;
                 } else rotation += 90;
-                console.log(rotation)
+                console.log(rotation);
                 break
 
             }
             default: break;
         }
 
-        console.log(e.key, horizontal, vertical)
+        console.log(e.key, horizontal, vertical);
 
         renderTetramino(piece, horizontal, vertical);
 
     }
 
+    let movePiece = (speed, piece) => {
+
+        movePiece = () => { };
+
+        setInterval(() => {
+            field.clearRect(0, 0, 1600, 1600);
+            if (vertical < piece.limitV) vertical++;
+            renderTetramino(piece, horizontal, vertical);
+        }, 500 * 1 / speed)
+    }
 
     document.addEventListener('keydown', handleKeyboardInput);
 
