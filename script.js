@@ -115,15 +115,28 @@ function draw() {
     let piece = 0;
 
     const testPieceHandler = e => {
-        testPiece = e.target.value;
+
+        switch (e.key) {
+            case '.':
+                if (testPiece >= 0 && testPiece < 6) {
+                    testPiece++
+                }
+
+                break;
+            case ',':
+                if (testPiece > 0 && testPiece <= 6) {
+                    testPiece--
+                }
+                break;
+
+            default:
+                break;
+        }
         piece = pieces[testPiece];
     }
 
-    console.log(testPiece);
-
-
     const handleKeyboardInput = (e) => {
-        movePiece(1, piece);
+        dropPiece(1);
         playerMovePiece(e, piece);
     }
 
@@ -177,9 +190,9 @@ function draw() {
 
     }
 
-    let movePiece = (speed, piece) => {
+    let dropPiece = (speed) => {
 
-        movePiece = () => { };
+        dropPiece = () => { };
 
         setInterval(() => {
             field.clearRect(0, 0, 1600, 1600);
@@ -191,7 +204,7 @@ function draw() {
     document.addEventListener('keydown', handleKeyboardInput);
 
     //for tests only
-    document.getElementById('dev-test').addEventListener('change', testPieceHandler);
+    document.addEventListener('keydown', testPieceHandler);
 }
 
 draw();
