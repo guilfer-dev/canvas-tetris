@@ -1,0 +1,17 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(70, 70, 107);
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+
+#field {
+    max-height: 80vh;
+    box-shadow: 1px 1px 4px black;
+    background-color: #191919;
+}

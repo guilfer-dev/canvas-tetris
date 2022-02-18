@@ -93,12 +93,8 @@ function draw() {
         for (let i = 0; i < piece.shape.length; i++) {
             for (let j = 0; j < piece.shape[i].length; j++) {
                 if (piece.shape[j][i] === 1) {
-                    //draw background (used as border)
-                    field.fillStyle = "black";
-                    field.fillRect((i * 40) + (x * 40), (j * 40) + (y * 40), 40, 40);
-                    //draw piece
                     field.fillStyle = piece.color;
-                    field.fillRect((i * 40) + (x * 40) - 2, (j * 40) + (y * 40) - 2, 40 - 4, 40 - 4);
+                    field.fillRect((x + i) * 100, (y + j) * 100, 90, 90);
                 }
             }
         }
@@ -144,7 +140,7 @@ function draw() {
 
         e.preventDefault();
 
-        field.clearRect(0, 0, 1600, 1600);
+        field.clearRect(0, 0, 1000, 2000);
 
 
         switch (e.key) {
@@ -195,7 +191,7 @@ function draw() {
         dropPiece = () => { };
 
         setInterval(() => {
-            field.clearRect(0, 0, 1600, 1600);
+            field.clearRect(0, 0, 1000, 2000);
             if (vertical < piece.limitV) vertical++;
             renderTetramino(piece, horizontal, vertical);
         }, 500 * 1 / speed)
